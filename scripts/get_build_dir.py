@@ -9,7 +9,7 @@ def run():
     s = "build/temp.%s-%.3s" % (get_platform(), sys.version)
     if hasattr(sys, 'gettotalrefcount'):
         s += '-pydebug'
-    print s
+    print(s)
 
 
 if __name__ == "__main__":

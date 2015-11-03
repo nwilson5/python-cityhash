@@ -9,6 +9,7 @@ from setuptools import setup
 from setuptools.extension import Extension
 from setuptools.dist import Distribution
 from pkg_resources import resource_string
+from os.path import join, dirname, split
 
 try:
     from Cython.Distutils import build_ext
@@ -17,6 +18,17 @@ except ImportError:
 else:
     USE_CYTHON = True
 
+LONG_DESCRIPTION = """
+
+"""
+
+def long_description():
+    """Return long description from README.rst if it's present
+    because it doesn't get installed."""
+    try:
+        return open(join(dirname(__file__), 'README.rst')).read()
+    except IOError:
+        return LONG_DESCRIPTION
 
 class BinaryDistribution(Distribution):
     """
@@ -57,8 +69,8 @@ else:
     )
 
 
-VERSION = '0.1.5'
-URL = "https://github.com/escherba/python-cityhash"
+VERSION = '0.2.1'
+URL = "https://github.com/nwilson5/python-cityhash"
 
 setup(
     version=VERSION,
@@ -81,6 +93,7 @@ setup(
         'Programming Language :: C++',
         'Programming Language :: Cython',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'Topic :: Internet',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Information Analysis',
@@ -88,6 +101,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities'
     ],
-    long_description=resource_string(__name__, 'README.rst'),
+    long_description=long_description(),
     distclass=BinaryDistribution,
 )
